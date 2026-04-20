@@ -36,18 +36,24 @@ function divide (a,b){
         return Math.round((a/b) * 100) / 100;
 }
 
+const point = document.querySelector("#point");
+point.addEventListener("click", ()=>{
+    point.disabled = true;
+});
 const display = document.querySelector("#display");
 const btn = document.querySelectorAll("button");
 btn.forEach((button) => {
   button.addEventListener("click", () => {
+
+    
+
     if(operators.includes(button.textContent.at(-1))){
         operator = button.textContent;
         firstNumber = display.value;
         console.log(firstNumber);
         console.log(operator);
         value = "";
-        
-    }else if(display.value.includes('.')){
+        point.disabled = false;
         
     }
     else if(button.textContent == "="){
@@ -71,6 +77,8 @@ btn.forEach((button) => {
         secondNumber == "";
         operator =="";
         value = "";
+        point.disabled = false;
+        
     }
     else{
         value += button.textContent;
