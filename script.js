@@ -4,6 +4,7 @@ let operator = "";
 let value = "";
 
 const operators = ["+","-","/","x"];
+const numbers = ["1","2","3","4","5","6","7","8","9"];
 
 function operate(operator,firstNumber,secondNumber){
     if (operator == "+")
@@ -42,6 +43,16 @@ point.addEventListener("click", ()=>{
 });
 const display = document.querySelector("#display");
 const btn = document.querySelectorAll("button");
+
+document.body.addEventListener("keydown", (e) =>{
+    console.log(e.key);
+    console.log(typeof(e.key));
+    if (numbers.includes(e.key)){
+        value += e.key;
+        display.value =value;
+        
+    }
+});
 btn.forEach((button) => {
   button.addEventListener("click", () => {
     if(button.textContent == "B" && value != ""){
