@@ -44,31 +44,49 @@ const display = document.querySelector("#display");
 const btn = document.querySelectorAll("button");
 btn.forEach((button) => {
   button.addEventListener("click", () => {
-
+    if(button.textContent == "B" && value != ""){
+        value = value.slice(0,-1);
+        display.value = value;
+        if(display.value.includes('.')){
+            point.disabled = true;
+        }else{
+            point.disabled = false;
+        }
     
-
-    if(operators.includes(button.textContent.at(-1))){
+    }else if(operators.includes(button.textContent.at(-1))){
         operator = button.textContent;
         firstNumber = display.value;
-        console.log(firstNumber);
-        console.log(operator);
+        //console.log(firstNumber);
+        //Wconsole.log(operator);
         value = "";
         point.disabled = false;
-        
+        display.value = "";
     }
     else if(button.textContent == "="){
-        secondNumber = display.value;
-        if(firstNumber == "" || secondNumber == "" || operator == "0"){
+        
+        if(firstNumber == "" || operator == ""){
             display.value = "0";
             value ="";
                 }
-        else{
+        else if(firstNumber != "" && operator != "") {
+            secondNumber = display.value;
+            if(secondNumber == ""){
+                display.value = "0";
 
-            display.value = operate(operator,firstNumber,secondNumber);
+            }else
+                {
+            display.value = operate(operator,firstNumber,secondNumber)
+            if(display.value.includes('.')){
+                point.disabled = true;
+            }
+            console.log(firstNumber);
+            console.log(operator);
+            console.log(secondNumber);
+            
             firstNumber = Number(display.value);
             operator = "";
             secondNumber = "";
-            value = "";
+            value = "";}
         }
     }
     else  if(button.textContent == "C"){
@@ -81,8 +99,11 @@ btn.forEach((button) => {
         
     }
     else{
-        value += button.textContent;
-        display.value = value;
+        if(button.textContent != "B"){
+            value += button.textContent;
+            display.value = value;
+        }
+        
 
     }
 
